@@ -1,4 +1,4 @@
-const whatsappNumber = "5511999999999";
+const whatsappNumber = "5511934992819";
 const whatsappMessage = "Olá! Gostaria de solicitar um orçamento para um evento.";
 
 function setupWhatsApp() {
