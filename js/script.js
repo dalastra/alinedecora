@@ -123,37 +123,150 @@ const lightboxCategory = document.querySelector(".lightbox-category");
 const lightboxDescription = document.querySelector(".lightbox-description");
 const lightboxClose = document.querySelector(".lightbox-close");
 
+const lightboxPrev = document.querySelector(".lightbox-prev");
+const lightboxNext = document.querySelector(".lightbox-next");
+
+let currentGallery = [];
+let currentImageIndex = 0;
+
+function updateLightboxImage() {
+  if (!lightboxImage || !currentGallery.length) return;
+
+  const imageName = currentGallery[currentImageIndex];
+
+  lightboxImage.src = `assets/images/${imageName}`;
+  lightboxImage.alt = lightboxTitle.textContent;
+}
+
+function updateLightboxButtons() {
+  if (!lightbox) return;
+
+  if (currentGallery.length <= 1) {
+    lightbox.classList.add("single-image");
+  } else {
+    lightbox.classList.remove("single-image");
+  }
+}
+
+function showPreviousImage() {
+  if (!currentGallery.length) return;
+
+  currentImageIndex--;
+
+  if (currentImageIndex < 0) {
+    currentImageIndex = currentGallery.length - 1;
+  }
+
+  updateLightboxImage();
+}
+
+function showNextImage() {
+  if (!currentGallery.length) return;
+
+  currentImageIndex++;
+
+  if (currentImageIndex >= currentGallery.length) {
+    currentImageIndex = 0;
+  }
+
+  updateLightboxImage();
+}
+
 function closeLightbox() {
   if (!lightbox) return;
+
   lightbox.classList.remove("open");
   lightbox.setAttribute("aria-hidden", "true");
   document.body.classList.remove("menu-open");
+
+  currentGallery = [];
+  currentImageIndex = 0;
 }
 
 document.querySelectorAll(".event-open").forEach(button => {
+
   button.addEventListener("click", () => {
+
     if (!lightbox) return;
+
     const card = button.closest(".event-card");
     const img = button.querySelector("img");
-    lightboxImage.src = img.src;
-    lightboxImage.alt = img.alt;
+
+    /*
+      Pega as imagens definidas no
+      data-images do evento
+    */
+    const images = card.dataset.images
+      ? card.dataset.images
+          .split(",")
+          .map(image => image.trim())
+          .filter(Boolean)
+      : [];
+
+    /*
+      Caso não tenha data-images,
+      utiliza a imagem principal
+    */
+    currentGallery = images.length
+      ? images
+      : [img.src.split("/").pop()];
+
+    currentImageIndex = 0;
+
     lightboxTitle.textContent = card.dataset.title;
-    lightboxCategory.textContent = card.querySelector("small").textContent;
-    lightboxDescription.textContent = card.dataset.description;
+    lightboxCategory.textContent =
+      card.querySelector("small").textContent;
+
+    lightboxDescription.textContent =
+      card.dataset.description;
+
+    updateLightboxImage();
+    updateLightboxButtons();
+
     lightbox.classList.add("open");
     lightbox.setAttribute("aria-hidden", "false");
+
     document.body.classList.add("menu-open");
+
     lightboxClose?.focus();
   });
+
 });
 
+
+/* Botões do carrossel */
+
+lightboxPrev?.addEventListener("click", showPreviousImage);
+
+lightboxNext?.addEventListener("click", showNextImage);
+
+
+/* Fechar */
+
 lightboxClose?.addEventListener("click", closeLightbox);
-lightbox?.querySelector(".lightbox-backdrop")?.addEventListener("click", closeLightbox);
+
+lightbox?.querySelector(".lightbox-backdrop")
+  ?.addEventListener("click", closeLightbox);
+
+
+/* Teclado */
+
 document.addEventListener("keydown", e => {
+
+  if (!lightbox?.classList.contains("open")) return;
+
   if (e.key === "Escape") {
     closeLightbox();
-    closeMenu();
   }
+
+  if (e.key === "ArrowLeft") {
+    showPreviousImage();
+  }
+
+  if (e.key === "ArrowRight") {
+    showNextImage();
+  }
+
 });
 
 setupWhatsApp();

@@ -41,22 +41,92 @@
           <button class="filter" data-filter="eventos">Eventos</button>
         </div>
         <div class="events-grid-full">
-          <article class="event-card reveal" data-category="infantil" data-title="Festa Infantil" data-description="Decoração alegre, criativa e personalizada para celebrar um aniversário especial."><button class="event-open" type="button"><img src="assets/images/evento-01.jpg" alt="Festa Infantil"><span>Festa Infantil</span><small>Festas Infantis</small></button></article>
-          <article class="event-card reveal" data-category="15anos" data-title="Aniversário de 15 Anos" data-description="Uma ambientação delicada e marcante para celebrar uma nova fase."><button class="event-open" type="button"><img src="assets/images/substituir.jpg" alt="Aniversário de 15 anos"><span>Aniversário</span><small>15 Anos</small></button></article>
-          <article class="event-card reveal" data-category="casamento" data-title="Casamento" data-description="Detalhes românticos pensados para criar uma atmosfera inesquecível."><button class="event-open" type="button"><img src="assets/images/substituir.jpg" alt="Casamento"><span>Casamento</span><small>Casamentos</small></button></article>
-          <article class="event-card reveal" data-category="eventos" data-title="Chá Revelação" data-description="Uma decoração personalizada para tornar a descoberta ainda mais especial."><button class="event-open" type="button"><img src="assets/images/evento-04.jpg" alt="Chá Revelação"><span>Chá Revelação</span><small>Eventos</small></button></article>
+          <article class="event-card reveal"
+            data-category="infantil"
+            data-title="Festa Infantil"
+            data-description="Decoração alegre, criativa e personalizada para celebrar um aniversário especial."
+            data-images="evento-01.jpg,evento-03.jpg">
+
+            <button class="event-open" type="button">
+              <img src="assets/images/evento-01.jpg" alt="Festa Infantil">
+              <span>Festa Infantil</span>
+              <small>Festas Infantis</small>
+            </button>
+          </article>   
+          <article class="event-card reveal"
+            data-category="15anos"
+            data-title="Aniversário de 15 Anos"
+            data-description="Uma ambientação delicada e marcante para celebrar uma nova fase."
+            data-images="">
+
+            <button class="event-open" type="button">
+              <img src="assets/images/evento-02.jpg" alt="Aniversário de 15 anos">
+              <span>Aniversário</span>
+              <small>15 Anos</small>
+            </button>
+          </article> 
+          <article class="event-card reveal"
+            data-category="casamento"
+            data-title="Casamento"
+            data-description="Uma decoração elegante e personalizada para tornar esse momento ainda mais inesquecível."
+            data-images="">
+
+            <button class="event-open" type="button">
+              <img src="assets/images/evento-04.jpg" alt="Casamento">
+              <span>Casamento</span>
+              <small>Casamentos</small>
+            </button>
+
+          </article>
+          <article class="event-card reveal"
+            data-category="eventos"
+            data-title="Evento Especial"
+            data-description="Decorações personalizadas para eventos especiais, com detalhes pensados para cada ocasião."
+            data-images="">
+
+            <button class="event-open" type="button">
+              <img src="assets/images/evento-04.jpg" alt="Evento Especial">
+              <span>Evento Especial</span>
+              <small>Eventos</small>
+            </button>
+
+          </article>
         </div>
       </div>
     </section>
 
     <div class="lightbox" aria-hidden="true">
-      <div class="lightbox-backdrop"></div>
-      <div class="lightbox-content" role="dialog" aria-modal="true" aria-label="Detalhes do evento">
-        <button class="lightbox-close" type="button" aria-label="Fechar">×</button>
-        <img class="lightbox-image" src="" alt="">
-        <div class="lightbox-info"><small class="lightbox-category"></small><h2 class="lightbox-title"></h2><p class="lightbox-description"></p></div>
-      </div>
+  <div class="lightbox-backdrop"></div>
+
+  <div class="lightbox-content"
+       role="dialog"
+       aria-modal="true"
+       aria-label="Detalhes do evento">
+
+    <button class="lightbox-close" type="button" aria-label="Fechar">
+      ×
+    </button>
+
+    <button class="lightbox-nav lightbox-prev" type="button" aria-label="Foto anterior">
+      ‹
+    </button>
+
+    <div class="lightbox-image-wrap">
+      <img class="lightbox-image" src="" alt="">
     </div>
+
+    <button class="lightbox-nav lightbox-next" type="button" aria-label="Próxima foto">
+      ›
+    </button>
+
+    <div class="lightbox-info">
+      <small class="lightbox-category"></small>
+      <h2 class="lightbox-title"></h2>
+      <p class="lightbox-description"></p>
+    </div>
+
+  </div>
+</div>
 
     <section class="contact section" id="contato">
       <div class="container contact-box reveal">
