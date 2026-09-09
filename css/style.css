@@ -16,8 +16,27 @@ button{font:inherit}
 .section{padding:110px 0;position:relative}
 .site-header{position:fixed;inset:0 0 auto;z-index:100;background:rgba(255,253,251,.86);backdrop-filter:blur(15px);border-bottom:1px solid transparent;transition:.3s}
 .site-header.scrolled{box-shadow:0 8px 30px rgba(30,20,25,.07);border-color:var(--line)}
-.nav-wrap{height:82px;display:flex;align-items:center;justify-content:space-between;gap:30px}
-.brand img{width: 100px;height:auto}
+.nav-wrap{height:82px;display:flex;align-items:center;justify-content:space-between;gap:30px;}
+.nav-wrap::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+
+    background-image: url("/assets/images/bolinhas-nav.png");
+    background-repeat: repeat;
+    background-size: 900px auto;
+    background-position: center;
+    margin-top: 15px;
+
+    opacity: 0.15;
+    pointer-events: none;
+}
+
+.navbar > * {
+    position: relative;
+    z-index: 1;
+}
+.brand img{width: 150px;height:auto}
 .main-nav{display:flex;align-items:center;gap:27px;font-size:13px;font-weight:600;color:#383438}
 .main-nav a:not(.btn){position:relative}
 .main-nav a:not(.btn)::after{content:"";position:absolute;left:0;bottom:-7px;width:0;height:2px;background:var(--pink);transition:.25s}
@@ -27,7 +46,7 @@ button{font:inherit}
 .btn-small{padding:11px 19px}
 .btn-ghost{background:transparent;color:var(--dark);box-shadow:none;border:1px solid #ded4d6}
 .btn-ghost:hover{background:#fff;border-color:var(--pink);color:var(--pink);box-shadow:none}
-.btn-light{background:#fff;color:var(--pink);box-shadow:none}
+.btn-light{background:#fff;color:var(--pink);box-shadow:none;margin-right: 10px;}
 .btn-light:hover{background:#fff;color:#b9567c}
 .menu-toggle{display:none;background:none;border:0;width:44px;height:44px;cursor:pointer}
 .menu-toggle span{display:block;width:24px;height:2px;background:var(--dark);margin:5px auto;transition:.3s}

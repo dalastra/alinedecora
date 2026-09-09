@@ -1,9 +1,23 @@
 const whatsappNumber = "5511954749236";
 const whatsappMessage = "Olá! Gostaria de solicitar um orçamento para um evento.";
 
+
+
 function setupWhatsApp() {
   document.querySelectorAll(".js-whatsapp").forEach(link => {
     link.href = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+  });
+}
+
+function setupEmail() {
+  document.querySelectorAll(".js-email").forEach(link => {
+    const email = "alineantunesdecora@gmail.com";
+    const assunto = "Solicitação de orçamento";
+    const mensagem = "Olá! Gostaria de solicitar um orçamento para um evento.";
+
+    link.href = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(email)}&su=${encodeURIComponent(assunto)}&body=${encodeURIComponent(mensagem)}`;
     link.target = "_blank";
     link.rel = "noopener noreferrer";
   });
@@ -270,3 +284,4 @@ document.addEventListener("keydown", e => {
 });
 
 setupWhatsApp();
+setupEmail();
