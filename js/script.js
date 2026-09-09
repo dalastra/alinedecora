@@ -283,5 +283,96 @@ document.addEventListener("keydown", e => {
 
 });
 
+/* ========================================
+   CARROSSEL DOS WORKSHOPS
+======================================== */
+
+const workshopSlides = document.querySelectorAll(".workshop-slide");
+const workshopDots = document.querySelector(".workshop-dots");
+const workshopPrev = document.querySelector(".workshop-prev");
+const workshopNext = document.querySelector(".workshop-next");
+
+let workshopIndex = 0;
+
+if (workshopSlides.length && workshopDots) {
+
+  /* Cria as bolinhas */
+
+  workshopSlides.forEach((_, index) => {
+
+    const dot = document.createElement("button");
+
+    dot.type = "button";
+    dot.classList.add("workshop-dot");
+
+    dot.setAttribute(
+      "aria-label",
+      `Mostrar foto ${index + 1}`
+    );
+
+    dot.addEventListener("click", () => {
+      showWorkshopSlide(index);
+    });
+
+    workshopDots.appendChild(dot);
+
+  });
+
+
+  function showWorkshopSlide(index) {
+
+    workshopIndex =
+      (index + workshopSlides.length) %
+      workshopSlides.length;
+
+    workshopSlides.forEach((slide, i) => {
+      slide.classList.toggle(
+        "active",
+        i === workshopIndex
+      );
+    });
+
+    [...workshopDots.children].forEach((dot, i) => {
+      dot.classList.toggle(
+        "active",
+        i === workshopIndex
+      );
+    });
+
+  }
+
+
+  workshopPrev?.addEventListener("click", () => {
+    showWorkshopSlide(workshopIndex - 1);
+  });
+
+
+  workshopNext?.addEventListener("click", () => {
+    showWorkshopSlide(workshopIndex + 1);
+  });
+
+
+  /* Começa na primeira foto */
+
+  showWorkshopSlide(0);
+
+
+  /* Troca automaticamente a cada 5 segundos */
+
+  let workshopTimer = setInterval(() => {
+    showWorkshopSlide(workshopIndex + 1);
+  }, 5000);
+
+
+  /* Pausa quando o mouse estiver sobre o carrossel */
+
+  document
+    .querySelector(".workshop-gallery")
+    ?.addEventListener("mouseenter", () => {
+      clearInterval(workshopTimer);
+    });
+
+}
+
 setupWhatsApp();
 setupEmail();
