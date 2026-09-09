@@ -287,18 +287,23 @@ document.addEventListener("keydown", e => {
    CARROSSEL DOS WORKSHOPS
 ======================================== */
 
-const workshopSlides = document.querySelectorAll(".workshop-slide");
-const workshopDots = document.querySelector(".workshop-dots");
-const workshopPrev = document.querySelector(".workshop-prev");
-const workshopNext = document.querySelector(".workshop-next");
+document.querySelectorAll(".workshop-content").forEach(workshop => {
 
-let workshopIndex = 0;
+  const slides = workshop.querySelectorAll(".workshop-slide");
+  const dotsContainer = workshop.querySelector(".workshop-dots");
+  const prevButton = workshop.querySelector(".workshop-prev");
+  const nextButton = workshop.querySelector(".workshop-next");
 
-if (workshopSlides.length && workshopDots) {
+  if (!slides.length || !dotsContainer) return;
 
-  /* Cria as bolinhas */
+  let currentIndex = 0;
+  let timer;
 
-  workshopSlides.forEach((_, index) => {
+  /* ==============================
+     CRIA AS BOLINHAS
+  ============================== */
+
+  slides.forEach((_, index) => {
 
     const dot = document.createElement("button");
 
@@ -311,68 +316,118 @@ if (workshopSlides.length && workshopDots) {
     );
 
     dot.addEventListener("click", () => {
-      showWorkshopSlide(index);
+      showSlide(index);
+      restartTimer();
     });
 
-    workshopDots.appendChild(dot);
+    dotsContainer.appendChild(dot);
 
   });
 
 
-  function showWorkshopSlide(index) {
+  /* ==============================
+     MOSTRA A FOTO
+  ============================== */
 
-    workshopIndex =
-      (index + workshopSlides.length) %
-      workshopSlides.length;
+  function showSlide(index) {
 
-    workshopSlides.forEach((slide, i) => {
+    currentIndex =
+      (index + slides.length) % slides.length;
+
+    slides.forEach((slide, i) => {
+
       slide.classList.toggle(
         "active",
-        i === workshopIndex
+        i === currentIndex
       );
+
     });
 
-    [...workshopDots.children].forEach((dot, i) => {
+    [...dotsContainer.children].forEach((dot, i) => {
+
       dot.classList.toggle(
         "active",
-        i === workshopIndex
+        i === currentIndex
       );
+
     });
 
   }
 
 
-  workshopPrev?.addEventListener("click", () => {
-    showWorkshopSlide(workshopIndex - 1);
+  /* ==============================
+     SETA ANTERIOR
+  ============================== */
+
+  prevButton?.addEventListener("click", () => {
+
+    showSlide(currentIndex - 1);
+    restartTimer();
+
   });
 
 
-  workshopNext?.addEventListener("click", () => {
-    showWorkshopSlide(workshopIndex + 1);
+  /* ==============================
+     SETA PRÓXIMA
+  ============================== */
+
+  nextButton?.addEventListener("click", () => {
+
+    showSlide(currentIndex + 1);
+    restartTimer();
+
   });
 
 
-  /* Começa na primeira foto */
+  /* ==============================
+     AUTOPLAY
+  ============================== */
 
-  showWorkshopSlide(0);
+  function startTimer() {
+
+    timer = setInterval(() => {
+
+      showSlide(currentIndex + 1);
+
+    }, 5000);
+
+  }
 
 
-  /* Troca automaticamente a cada 5 segundos */
+  function restartTimer() {
 
-  let workshopTimer = setInterval(() => {
-    showWorkshopSlide(workshopIndex + 1);
-  }, 5000);
+    clearInterval(timer);
+    startTimer();
+
+  }
 
 
-  /* Pausa quando o mouse estiver sobre o carrossel */
+  /* ==============================
+     PAUSA AO PASSAR O MOUSE
+  ============================== */
 
-  document
-    .querySelector(".workshop-gallery")
-    ?.addEventListener("mouseenter", () => {
-      clearInterval(workshopTimer);
-    });
+  workshop.addEventListener("mouseenter", () => {
 
-}
+    clearInterval(timer);
+
+  });
+
+
+  workshop.addEventListener("mouseleave", () => {
+
+    startTimer();
+
+  });
+
+
+  /* ==============================
+     INICIALIZA
+  ============================== */
+
+  showSlide(0);
+  startTimer();
+
+});
 
 setupWhatsApp();
 setupEmail();

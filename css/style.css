@@ -400,12 +400,13 @@ h1 em,h2 em{font-style:italic;color:var(--pink)}
   border-radius: 28px;
   overflow: hidden;
   background: #f4e9ec;
+  margin: 10px;
 }
 
 .workshop-video video {
   width: 100%;
   height: 100%;
-  min-height: 500px;
+  height: 500px;
   display: block;
   object-fit: cover;
 }
@@ -450,15 +451,17 @@ h1 em,h2 em{font-style:italic;color:var(--pink)}
 .workshop-gallery {
   position: relative;
   min-height: 500px;
+  height: 500px;
   border-radius: 28px;
   overflow: hidden;
   background: #f4e9ec;
 }
 
 .workshop-slides {
-    width: 100%;
-    aspect-ratio: 4 / 3;
-    position: relative;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  inset: 0;
 }
 
 .workshop-slide {
@@ -469,6 +472,7 @@ h1 em,h2 em{font-style:italic;color:var(--pink)}
   height: 100%;
 
   object-fit: cover;
+  object-position: center;
 
   opacity: 0;
   visibility: hidden;
