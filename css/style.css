@@ -394,21 +394,23 @@ h1 em,h2 em{font-style:italic;color:var(--pink)}
 
 /* VÍDEO */
 
+/* VÍDEOS DOS WORKSHOPS */
+
 .workshop-video {
   position: relative;
-  min-height: 500px;
-  border-radius: 28px;
+  width: 100%;
+  height: 500px;
   overflow: hidden;
+  border-radius: 28px;
   background: #f4e9ec;
-  margin: 10px;
 }
 
 .workshop-video video {
+  display: block;
   width: 100%;
   height: 100%;
-  height: 500px;
-  display: block;
   object-fit: cover;
+  object-position: center;
 }
 
 .workshop-video:after {
@@ -583,7 +585,7 @@ h1 em,h2 em{font-style:italic;color:var(--pink)}
     height: 400px;
   }
 
-  .workshop-video video,
+  .workshop-video video
   .workshop-slides {
     min-height: 400px;
     height: 400px;
