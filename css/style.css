@@ -390,6 +390,7 @@ h1 em,h2 em{font-style:italic;color:var(--pink)}
   grid-template-columns: 1fr 1fr;
   gap: 25px;
   align-items: stretch;
+  margin: 20px;
 }
 
 /* VÍDEO */
