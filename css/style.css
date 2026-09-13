@@ -592,6 +592,10 @@ h1 em,h2 em{font-style:italic;color:var(--pink)}
     height: 400px;
   }
 
+  .btn-light{
+    margin-top: 10px;
+  }
+
 }
 
 @media (max-width: 600px) {
@@ -633,6 +637,10 @@ h1 em,h2 em{font-style:italic;color:var(--pink)}
 
   .workshop-next {
     right: 12px;
+  }
+
+  .btn-light{
+    margin-top: 10px;
   }
 
 }
