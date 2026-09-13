@@ -582,10 +582,11 @@ h1 em,h2 em{font-style:italic;color:var(--pink)}
 
   .workshop-video,
   .workshop-gallery {
+    margin: 10px;
     height: 400px;
   }
 
-  .workshop-video video
+  .workshop-video video,
   .workshop-slides {
     min-height: 400px;
     height: 400px;
