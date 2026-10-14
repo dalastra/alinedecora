@@ -646,3 +646,135 @@ h1 em,h2 em{font-style:italic;color:var(--pink)}
   }
 
 }
+
+/*formulario*/
+
+
+.formulario-contato {
+    width: 100%;
+    padding: 70px 20px;
+    background-color: #faf7f4;
+    font-family: "DM Sans", Arial, sans-serif;
+}
+
+.formulario-contato__container {
+    max-width: 520px;
+    margin: 0 auto;
+    padding: 40px;
+    background-color: var(--pink);
+    border: 1px solid #eee3df;
+    border-radius: 30px;
+    box-shadow: 0 10px 35px rgba(80, 55, 45, 0.05);
+}
+
+.formulario-contato h2 {
+    margin: 0 0 32px;
+    color: #ffff;
+    font-family: "Playfair Display", Georgia, serif;
+    font-size: 34px;
+    font-weight: 500;
+    text-align: center;
+}
+
+.formulario-contato form {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+
+.formulario-contato__campo {
+    display: flex;
+    flex-direction: column;
+
+    gap: 8px;
+}
+
+.formulario-contato__campo label {
+    color: #ffff;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.formulario-contato__campo input {
+    width: 100%;
+    min-height: 48px;
+    padding: 12px 14px;
+    box-sizing: border-box;
+
+    color: #403532;
+    background-color: #fdfbf9;
+    border: 1px solid #e8ded8;
+    border-radius: 4px;
+    outline: none;
+    font-family: inherit;
+    font-size: 13px;
+
+    transition: border-color 0.25s ease,
+                box-shadow 0.25s ease;
+                
+}
+
+.formulario-contato__campo input::placeholder {
+    color: #b0a5a0;
+
+}
+
+.formulario-contato__campo input:focus {
+    border-color: #c7838d;
+    box-shadow: 0 0 0 3px rgba(199, 131, 141, 0.12);
+}
+
+.formulario-contato__botao {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+
+    width: 100%;
+    min-height: 52px;
+    margin-top: 8px;
+    padding: 14px 20px;
+
+    color: var(--pink);
+    background-color: #ffff;
+    border: 1px  #a65f6b;
+    border-radius: 30px;
+
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 600;
+
+    cursor: pointer;
+    transition: background-color 0.25s ease,
+                transform 0.25s ease;
+}
+
+.formulario-contato__botao:hover {
+    color: #ef7c91;
+    transform: translateY(-2px);
+}
+
+.formulario-contato__botao span {
+    font-size: 18px;
+}
+
+/* Responsividade */
+
+@media (max-width: 600px) {
+    .formulario-contato {
+        padding: 40px 16px;
+    }
+
+    .formulario-contato__container {
+        padding: 28px 20px;
+    }
+
+    .formulario-contato h2 {
+        font-size: 29px;
+        margin-bottom: 26px;
+    }
+
+    .formulario-contato form {
+        gap: 18px;
+    }
+}
