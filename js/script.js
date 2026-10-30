@@ -132,6 +132,7 @@ if (filters.length && eventCards.length) {
 
 const lightbox = document.querySelector(".lightbox");
 const lightboxImage = document.querySelector(".lightbox-image");
+const lightboxVideo = document.querySelector(".lightbox-video");
 const lightboxTitle = document.querySelector(".lightbox-title");
 const lightboxCategory = document.querySelector(".lightbox-category");
 const lightboxDescription = document.querySelector(".lightbox-description");
@@ -142,14 +143,56 @@ const lightboxNext = document.querySelector(".lightbox-next");
 
 let currentGallery = [];
 let currentImageIndex = 0;
+let currentBaseCategory = "";
+
+function isVideoFile(fileName) {
+  return /\.(mp4|webm|ogg|mov)$/i.test(fileName || "");
+}
 
 function updateLightboxImage() {
-  if (!lightboxImage || !currentGallery.length) return;
+  if (!currentGallery.length) return;
 
-  const imageName = currentGallery[currentImageIndex];
+  const mediaName = currentGallery[currentImageIndex];
+  const isVideo = isVideoFile(mediaName);
 
-  lightboxImage.src = `assets/images/${imageName}`;
-  lightboxImage.alt = lightboxTitle.textContent;
+  if (lightboxCategory && currentBaseCategory) {
+    const mediaTypeLabel = isVideo ? " • Vídeo" : "";
+    lightboxCategory.textContent = `${currentBaseCategory} (${currentImageIndex + 1} de ${currentGallery.length}${mediaTypeLabel})`;
+  }
+
+  if (lightboxVideo) {
+    lightboxVideo.pause();
+  }
+
+  if (isVideo) {
+    if (lightboxImage) lightboxImage.style.display = "none";
+    if (lightboxVideo) {
+      lightboxVideo.style.display = "block";
+      const videoPath = `assets/videos/${mediaName}`;
+      lightboxVideo.muted = true;
+      lightboxVideo.poster = "assets/images/festa15-castelo-01.jpeg";
+      lightboxVideo.src = videoPath;
+      lightboxVideo.innerHTML = `<source src="${videoPath}" type="video/mp4">`;
+      lightboxVideo.currentTime = 0;
+      lightboxVideo.load();
+      const playPromise = lightboxVideo.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(() => {});
+      }
+    }
+  } else {
+    if (lightboxVideo) {
+      lightboxVideo.style.display = "none";
+      lightboxVideo.removeAttribute("src");
+      lightboxVideo.innerHTML = "";
+      lightboxVideo.load();
+    }
+    if (lightboxImage) {
+      lightboxImage.style.display = "block";
+      lightboxImage.src = `assets/images/${mediaName}`;
+      lightboxImage.alt = lightboxTitle.textContent;
+    }
+  }
 }
 
 function updateLightboxButtons() {
@@ -189,12 +232,20 @@ function showNextImage() {
 function closeLightbox() {
   if (!lightbox) return;
 
+  if (lightboxVideo) {
+    lightboxVideo.pause();
+    lightboxVideo.removeAttribute("src");
+    lightboxVideo.innerHTML = "";
+    lightboxVideo.load();
+  }
+
   lightbox.classList.remove("open");
   lightbox.setAttribute("aria-hidden", "true");
   document.body.classList.remove("menu-open");
 
   currentGallery = [];
   currentImageIndex = 0;
+  currentBaseCategory = "";
 }
 
 document.querySelectorAll(".event-open").forEach(button => {
@@ -227,9 +278,9 @@ document.querySelectorAll(".event-open").forEach(button => {
 
     currentImageIndex = 0;
 
+    currentBaseCategory = card.querySelector("small")?.textContent || "";
     lightboxTitle.textContent = card.dataset.title;
-    lightboxCategory.textContent =
-      card.querySelector("small").textContent;
+    lightboxCategory.textContent = currentBaseCategory;
 
     lightboxDescription.textContent =
       card.dataset.description;
