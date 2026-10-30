@@ -255,7 +255,7 @@ document.querySelectorAll(".event-open").forEach(button => {
     if (!lightbox) return;
 
     const card = button.closest(".event-card");
-    const img = button.querySelector("img");
+    const mediaEl = button.querySelector("img, video");
 
     /*
       Pega as imagens definidas no
